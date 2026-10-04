@@ -1,0 +1,1225 @@
+/* ==========================================================
+   Kwork Dark — components.css
+   Патчи того, что не покрывается токенами: хардкод-цвета,
+   белые фоны, тени, поповеры, старые компоненты (fox/green-btn).
+   Все правила под :root:not([data-kw-light]) — тема включена.
+   ========================================================== */
+
+/* ==========================================================
+   0. ГЛОБАЛЬНЫЙ ЗАЩИТНЫЙ КОНТУР
+   Задача: не пропустить светлый фон нигде, включая новые
+   компоненты, которых ещё нет в списках ниже.
+
+   0.1. Токен --color-typography-white перевёрнут в тёмную
+        поверхность (см. tokens.css). Он работал на сайте и как
+        фон, и как цвет текста, поэтому перечислять сотни
+        селекторов поимённо не нужно — чинится оба случая.
+
+   0.2. Ниже — страховка на будущее: селекторы по подстроке
+        имени класса ловят любые «bgWhite…», «…bg-white…»,
+        «…white-bg…», «bgWhiteNoImp» и подобные, включая те,
+        что появятся в следующих версиях сайта.
+   ========================================================== */
+
+/* Подложки, названные словом «white» в любом написании */
+:root:not([data-kw-light]) [class*="bgWhite"],
+:root:not([data-kw-light]) [class*="bg-white"],
+:root:not([data-kw-light]) [class*="bg_white"],
+:root:not([data-kw-light]) [class*="whiteBg"],
+:root:not([data-kw-light]) [class*="white-bg"],
+:root:not([data-kw-light]) [class*="White-bg"],
+:root:not([data-kw-light]) [class*="bgLight"],
+:root:not([data-kw-light]) [class*="bg-light"],
+:root:not([data-kw-light]) [class*="lightBg"] {
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+/* Инлайновые стили вида style="background:#fff" */
+:root:not([data-kw-light]) [style*="#fff"],
+:root:not([data-kw-light]) [style*="#FFF"],
+:root:not([data-kw-light]) [style*="#ffffff"],
+:root:not([data-kw-light]) [style*="white"] {
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+/* Утилиты Bootstrap-подобного слоя: .white и .color-white
+   задают БЕЛЫЙ ЦВЕТ ТЕКСТА, а не фон — их текст оставляем белым,
+   но фон подложки приводим к теме. */
+:root:not([data-kw-light]) .white,
+:root:not([data-kw-light]) .color-white,
+:root:not([data-kw-light]) .color--typography-white,
+:root:not([data-kw-light]) .kw-color--white,
+:root:not([data-kw-light]) .m-white {
+  color: var(--kwd-white) !important;
+}
+
+/* ----------------------------------------------------------
+   1. Настоящий белый текст там, где он нужен
+   После переворота токена белый текст исчез бы с цветных
+   кнопок, плашек, бейджей и поверх фотографий. Здесь он
+   возвращается — списком реальных селекторов kwork.
+   ---------------------------------------------------------- */
+
+/* Поверх фотографий и видео: здесь тёмный текст нечитаем */
+:root:not([data-kw-light]) .banner-slider__content,
+:root:not([data-kw-light]) .banner-slider__name,
+:root:not([data-kw-light]) .banner-slider__profession,
+:root:not([data-kw-light]) .for-sellers__header-title,
+:root:not([data-kw-light]) .for-sellers__header-subtitle,
+:root:not([data-kw-light]) .for-sellers__header-stats-list-item,
+:root:not([data-kw-light]) .for-sellers__header-stats-list-amount,
+:root:not([data-kw-light]) .for-sellers__people-list-profession-title,
+:root:not([data-kw-light]) .promo-video__link,
+:root:not([data-kw-light]) .faq_page .title,
+:root:not([data-kw-light]) .header--theme-dark .header-menu-link,
+:root:not([data-kw-light]) .header--theme-dark .custom-search input,
+:root:not([data-kw-light]) .header--theme-dark .header__login,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu__items,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu__item-link,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu__sublist .mobile-menu__link,
+:root:not([data-kw-light]) .header--theme-dark .select-header__list-item-text,
+:root:not([data-kw-light]) .header--theme-dark .select-header__list-dropdown,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu__item-link:hover,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu__item-link:active,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu__sublist .mobile-menu__link:hover,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu__sublist .mobile-menu__link:active,
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu .custom-switch .slider:not(.active),
+:root:not([data-kw-light]) .header--theme-dark .mobile-menu .custom-switch.loading .slider,
+:root:not([data-kw-light]) .mobile-menu__item-title .user-active-orders-count,
+:root:not([data-kw-light]) .mobile-menu__sublist .mobile-menu__link-back .mobile-menu__item-title,
+:root:not([data-kw-light]) .header .message-counter,
+:root:not([data-kw-light]) .header .user-active-orders-count {
+  color: var(--kwd-white) !important;
+}
+
+/* Цветные плашки, уведомления и акценты */
+:root:not([data-kw-light]) .user-avatar__default,
+:root:not([data-kw-light]) .abandoned-basket__layout,
+:root:not([data-kw-light]) .headline-notice,
+:root:not([data-kw-light]) .info-cookie-uses__text,
+:root:not([data-kw-light]) .k-modal-content__header .title-label,
+:root:not([data-kw-light]) .k-tabs__item--active .k-tabs__item-number,
+:root:not([data-kw-light]) .k-tabs__item.active .k-tabs__item-number,
+:root:not([data-kw-light]) .k-tabs .k-tabs__item:hover .k-tabs__item-number,
+:root:not([data-kw-light]) .k-switch--light .k-switch__label,
+:root:not([data-kw-light]) .quiz-day__panel span,
+:root:not([data-kw-light]) .payer-company-switch__tooltip-link a,
+:root:not([data-kw-light]) .payer-company-switch__tooltip-link a:hover,
+:root:not([data-kw-light]) .a.tag,
+:root:not([data-kw-light]) .tag,
+:root:not([data-kw-light]) .table-style a.white,
+:root:not([data-kw-light]) .fox_success,
+:root:not([data-kw-light]) .fox_success a,
+:root:not([data-kw-light]) .fox_success_attention,
+:root:not([data-kw-light]) .fox_success_attention button:hover,
+:root:not([data-kw-light]) .fox_warning,
+:root:not([data-kw-light]) .fox_error,
+:root:not([data-kw-light]) .fox_error a,
+:root:not([data-kw-light]) .fox_attention,
+:root:not([data-kw-light]) .fox_event,
+:root:not([data-kw-light]) .fox_event a,
+:root:not([data-kw-light]) .sales h2,
+:root:not([data-kw-light]) .profile h2,
+:root:not([data-kw-light]) h1.new:after,
+:root:not([data-kw-light]) .tooltip_circle_hover,
+:root:not([data-kw-light]) .tooltip_circle--light.tooltip_circle--hover:hover,
+:root:not([data-kw-light]) .tooltip_circle--orange,
+:root:not([data-kw-light]) .tooltip_circle--orange.tooltip_circle_hover {
+  color: var(--kwd-white) !important;
+}
+
+/* Акцентные фоны: белый текст на них обязателен */
+:root:not([data-kw-light]) .k-tabs__item.active,
+:root:not([data-kw-light]) .quiz-day__tab.active,
+:root:not([data-kw-light]) .k-switch--light .k-switch__slider {
+  color: var(--kwd-white) !important;
+}
+
+/* Социальные кнопки: VK/VKID рисуют белым по контуру */
+:root:not([data-kw-light]) .social-button--vk > span,
+:root:not([data-kw-light]) .social-button--vkid > span {
+  background: transparent !important;
+  color: var(--kwd-white) !important;
+}
+
+/* ------------------------------------------------------------
+   1a. Остатки: точечные случаи жёсткого белого
+   Список собран из разбора 91 CSS-файла kwork.
+   ------------------------------------------------------------ */
+
+:root:not([data-kw-light]) .bgWhite,
+:root:not([data-kw-light]) .bgWhiteNoImp,
+:root:not([data-kw-light]) .white-bg-block,
+:root:not([data-kw-light]) .white-bg-block-oferta,
+:root:not([data-kw-light]) .white-bg-border,
+:root:not([data-kw-light]) .bg-white {
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+:root:not([data-kw-light]) .card,
+:root:not([data-kw-light]) .card-wrapper .card {
+  background-color: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .card-wrapper,
+:root:not([data-kw-light]) .bg-light,
+:root:not([data-kw-light]) .bg-secondary,
+:root:not([data-kw-light]) .collapse-block.active .collapse-block__title,
+:root:not([data-kw-light]) .collapse-block__title:hover {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+}
+
+/* Формы на белой подложке */
+:root:not([data-kw-light]) .input-styled,
+:root:not([data-kw-light]) .select-styled,
+:root:not([data-kw-light]) .chosen-container-single .chosen-single,
+:root:not([data-kw-light]) .js-chosen-select .chosen-container-multi .chosen-choices,
+:root:not([data-kw-light]) .input-style,
+:root:not([data-kw-light]) .textarea-style,
+:root:not([data-kw-light]) .form-item--bordered {
+  background-color: #171a20 !important;
+  border-color: var(--color-grayscale-field-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .chosen-container-single .chosen-single span,
+:root:not([data-kw-light]) .chosen-container .chosen-results li {
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .chosen-container .chosen-results li.highlighted,
+:root:not([data-kw-light]) .chosen-container-single .chosen-single:hover {
+  background-color: #262b34 !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .chosen-container .chosen-results {
+  background: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .chosen-container-single .chosen-single::after {
+  border-top-color: var(--color-grayscale-icon) !important;
+}
+
+/* ----------------------------------------------------------
+   2. Границы
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .border,
+:root:not([data-kw-light]) .border-top,
+:root:not([data-kw-light]) .border-right,
+:root:not([data-kw-light]) .border-bottom,
+:root:not([data-kw-light]) .border-left {
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .border-secondary,
+:root:not([data-kw-light]) .border-light {
+  border-color: var(--color-grayscale-page-bg-light) !important;
+}
+
+:root:not([data-kw-light]) ul.order-extras-list li,
+:root:not([data-kw-light]) ul.order-extras-list.order-extras-list-bottom > li,
+:root:not([data-kw-light]) .order-extras-list .clarification-block,
+:root:not([data-kw-light]) .popup-individual-message .border-top,
+:root:not([data-kw-light]) .faq_page-block_item {
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .white-bg-border {
+  border-color: var(--color-grayscale-border) !important;
+}
+
+/* ----------------------------------------------------------
+   3. Поповеры, меню, выпадающие списки
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .menulist,
+:root:not([data-kw-light]) .select-header__list,
+:root:not([data-kw-light]) .mobile-menu__sublist {
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+:root:not([data-kw-light]) .mobile-menu__sublist .mobile-menu__link:hover,
+:root:not([data-kw-light]) .mobile-menu__sublist .mobile-menu__link:active,
+:root:not([data-kw-light]) .custom-search .dropdown-suggestions .suggestion:hover,
+:root:not([data-kw-light]) .custom-search .dropdown-suggestions .suggestion-user:hover {
+  background-color: var(--color-grayscale-border-hover) !important;
+}
+
+:root:not([data-kw-light]) .custom-search .dropdown-suggestions,
+:root:not([data-kw-light]) .ui-widget-content {
+  background-color: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .ui-widget-content .ui-menu-item:hover,
+:root:not([data-kw-light]) .ui-widget-content .ui-state-hover {
+  background: var(--color-grayscale-border-hover) !important;
+  border-color: var(--color-grayscale-border-hover) !important;
+}
+
+/* Градиентные «затухания» на белом — перекрашиваем в тёмный */
+:root:not([data-kw-light]) .oneline-faded::after,
+:root:not([data-kw-light]) .multiline-faded::after,
+:root:not([data-kw-light]) .k-tabs__arrow::after,
+:root:not([data-kw-light]) .k-tabs__arrow::before {
+  background: linear-gradient(
+    90deg,
+    rgba(28, 31, 38, 0),
+    var(--color-grayscale-bg-base) 70%,
+    var(--color-grayscale-bg-base)
+  ) !important;
+}
+
+/* ----------------------------------------------------------
+   4. Модальные окна
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .modal-content {
+  background-color: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .modal-header,
+:root:not([data-kw-light]) .modal-footer {
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .k-modal-content,
+:root:not([data-kw-light]) .k-modal-content__header,
+:root:not([data-kw-light]) .k-modal-content__footer {
+  background-color: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .k-modal-content__body {
+  background-color: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .k-modal--slide .k-modal-content__footer {
+  border-top-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .k-modal-content__header-close,
+:root:not([data-kw-light]) .k-modal-content__header-title {
+  color: var(--color-typography-title) !important;
+}
+
+:root:not([data-kw-light]) .k-modal__overlay,
+:root:not([data-kw-light]) .k-modal-overlay {
+  background: rgba(6, 7, 9, 0.72) !important;
+}
+
+/* Затемняющие подложки: в kwork часто инлайновые */
+:root:not([data-kw-light]) .v-modal-overlay {
+  background: rgba(6, 7, 9, 0.72) !important;
+}
+
+/* Фото-вьювер: подложка и тени */
+:root:not([data-kw-light]) .t-image-viewer .iv-container,
+:root:not([data-kw-light]) .t-image-viewer .iv-viewport,
+:root:not([data-kw-light]) .iv-comments-tooltip,
+:root:not([data-kw-light]) .vc-nav-popover-container {
+  background: var(--color-grayscale-bg-dark) !important;
+  color: var(--color-typography-text) !important;
+}
+
+/* ----------------------------------------------------------
+   5. Старые кнопки fox-styles (градиенты + белый фон)
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .white-btn,
+:root:not([data-kw-light]) .green-btn.inactive,
+:root:not([data-kw-light]) .orange-btn.inactive,
+:root:not([data-kw-light]) .button.button-gray,
+:root:not([data-kw-light]) .button.button-gray-success,
+:root:not([data-kw-light]) .button.button-gray-danger {
+  background: var(--color-grayscale-bg-base) !important;
+  background-image: none !important;
+  border: 1px solid var(--color-grayscale-field-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .white-btn:hover:not(.disabled),
+:root:not([data-kw-light]) .button.button-gray:hover,
+:root:not([data-kw-light]) .button.button-gray-success:hover {
+  background: var(--color-grayscale-border-hover) !important;
+  background-image: none !important;
+  color: var(--color-typography-text) !important;
+}
+
+/* У этих двух ховер переводит кнопку в цветной градиент —
+   в тёмной теме оставляем спокойный тёмный фон с белым текстом. */
+:root:not([data-kw-light]) .button.button-gray-success:hover,
+:root:not([data-kw-light]) .button.button-gray-danger:hover {
+  background-image: none !important;
+  color: var(--color-typography-text) !important;
+}
+
+/* Активный radio/checкбокс: тонированная плашка с белым текстом */
+:root:not([data-kw-light]) .radio-group__label--checked,
+:root:not([data-kw-light]) .auth-form .select-user-type .radio-group__label--checked {
+  background: var(--kwd-on-primary) !important;
+  border-color: var(--kwd-on-primary) !important;
+  color: #fff !important;
+}
+
+:root:not([data-kw-light]) .radio-group__label--checked:hover {
+  border-color: var(--kwd-on-primary-hover) !important;
+}
+
+:root:not([data-kw-light]) .button.button-gray-flat {
+  background-color: var(--color-grayscale-bg-base) !important;
+  background-image: none !important;
+  border-color: var(--color-grayscale-field-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+/* Ховер зелёной/оранжевой кнопки задаётся выше явным фоном */
+:root:not([data-kw-light]) .green-btn.inactive,
+:root:not([data-kw-light]) .orange-btn.inactive {
+  background: var(--color-grayscale-bg-base) !important;
+}
+
+/* Кнопки kwork с хардкодом #4a4a4a */
+:root:not([data-kw-light]) .kw-color--gray-hover,
+:root:not([data-kw-light]) .kw-button--waiting.kw-button--gray-border,
+:root:not([data-kw-light]) .kw-button--waiting.kw-button--gray-transparent,
+:root:not([data-kw-light]) .kw-button--gray-transparent:hover,
+:root:not([data-kw-light]) .kw-button--gray-border:not(.kw-button--inactive):not(.kw-button--waiting):hover,
+:root:not([data-kw-light]) .kw-button--contact:not(.kw-button--inactive):not(.kw-button--waiting):hover,
+:root:not([data-kw-light]) .kw-button--white:not(.kw-button--inactive):not(.kw-button--waiting):hover {
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-grayscale-field-border) !important;
+}
+
+:root:not([data-kw-light]) .kw-button--waiting.kw-button--gray-border,
+:root:not([data-kw-light]) .kw-button--waiting.kw-button--gray-transparent,
+:root:not([data-kw-light]) .kw-button--gray-transparent:hover,
+:root:not([data-kw-light]) .kw-button--gray-border:not(.kw-button--inactive):not(.kw-button--waiting):hover,
+:root:not([data-kw-light]) .kw-button--contact:not(.kw-button--inactive):not(.kw-button--waiting):hover,
+:root:not([data-kw-light]) .kw-button--white:not(.kw-button--inactive):not(.kw-button--waiting):hover {
+  background-color: var(--color-grayscale-border-hover) !important;
+}
+
+/* Бело-заливные варианты кнопок становятся «призрачными» */
+:root:not([data-kw-light]) .kw-button--white,
+:root:not([data-kw-light]) .kw-button--white-border,
+:root:not([data-kw-light]) .kw-button--orange-border {
+  background-color: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-grayscale-field-border) !important;
+}
+
+:root:not([data-kw-light]) .kw-button--white:hover:not(.kw-button--inactive):not(.kw-button--waiting),
+:root:not([data-kw-light]) .kw-button--white-border:hover:not(.kw-button--inactive):not(.kw-button--waiting) {
+  background-color: var(--color-grayscale-border-hover) !important;
+}
+
+/* Алерты и служебные плашки */
+:root:not([data-kw-light]) .kw-alert,
+:root:not([data-kw-light]) .fox_success,
+:root:not([data-kw-light]) .fox_error,
+:root:not([data-kw-light]) .fox_warning,
+:root:not([data-kw-light]) .fox_attention,
+:root:not([data-kw-light]) .fox_notice,
+:root:not([data-kw-light]) .fox_error a,
+:root:not([data-kw-light]) .event-message--verify,
+:root:not([data-kw-light]) .modal-review__hint-inner,
+:root:not([data-kw-light]) .attribute-competition__tooltip-text-wrapper {
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .kw-alert {
+  background: var(--color-accent-attention-background) !important;
+  border-color: var(--color-accent-attention-border-solid) !important;
+}
+
+:root:not([data-kw-light]) .waiting,
+:root:not([data-kw-light]) .wating {
+  background-color: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-support) !important;
+}
+
+/* ----------------------------------------------------------
+   5b. Фоны кнопок с белым текстом
+   Акцентные токены яркие — они нужны для ссылок и иконок на
+   тёмном фоне. Но на кнопках лежит белый текст, а поверх
+   яркого зелёного/оранжевого он нечитаем (контраст ~1.9).
+   Поэтому для кнопок задаём затемнённые оттенки: белый текст
+   на них даёт контраст 4.5–5.0 (WCAG AA).
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .kw-button--green,
+:root:not([data-kw-light]) .kw-button--green-hover,
+:root:not([data-kw-light]) .green-btn,
+:root:not([data-kw-light]) .button.button-success {
+  background-color: var(--kwd-on-positive) !important;
+  color: #fff !important;
+}
+
+:root:not([data-kw-light]) .kw-button--green:hover:not(.kw-button--inactive):not(.kw-button--waiting),
+:root:not([data-kw-light]) .kw-button--green-hover:hover:not(.kw-button--inactive):not(.kw-button--waiting),
+:root:not([data-kw-light]) .green-btn:not(.btn_no-hover):not(.disabled):not([disabled]):hover,
+:root:not([data-kw-light]) .button.button-success:hover {
+  background-color: var(--kwd-on-positive-hover) !important;
+  filter: none !important;
+}
+
+/* Загрузка/ожидание на зелёной кнопке */
+:root:not([data-kw-light]) .kw-button--waiting.kw-button--green,
+:root:not([data-kw-light]) .kw-button--green .kw-button--loading {
+  background-color: var(--kwd-on-positive-muted) !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+:root:not([data-kw-light]) .kw-button--orange,
+:root:not([data-kw-light]) .orange-btn,
+:root:not([data-kw-light]) .OrangeBtnStyle,
+:root:not([data-kw-light]) .button.button-warning {
+  background-color: var(--kwd-on-attention) !important;
+  color: #fff !important;
+}
+
+:root:not([data-kw-light]) .kw-button--orange:hover:not(.kw-button--inactive):not(.kw-button--waiting),
+:root:not([data-kw-light]) .orange-btn:not(.btn_no-hover):hover,
+:root:not([data-kw-light]) .button.button-warning:hover {
+  background-color: var(--kwd-on-attention-hover) !important;
+  filter: none !important;
+}
+
+:root:not([data-kw-light]) .kw-button--red,
+:root:not([data-kw-light]) .RedBtnStyle,
+:root:not([data-kw-light]) .btn-hover-red:hover,
+:root:not([data-kw-light]) .button.button-danger {
+  background-color: var(--kwd-on-negative) !important;
+  color: #fff !important;
+}
+
+:root:not([data-kw-light]) .button.button-danger:hover {
+  background-color: var(--kwd-on-negative-hover) !important;
+}
+
+/* Синие кнопки: наш primary и так даёт 4.93 с белым текстом,
+   но подстрахуемся явным фоном, чтобы не зависеть от токена. */
+:root:not([data-kw-light]) .kw-button--blue,
+:root:not([data-kw-light]) .kw-button--primary {
+  background-color: var(--kwd-on-primary) !important;
+  color: #fff !important;
+}
+
+/* Бейджи вроде .kwork-card-badge — цветной фон с белым текстом */
+:root:not([data-kw-light]) .kwork-card-badge {
+  background-color: var(--kwd-on-positive) !important;
+  color: #fff !important;
+}
+
+/* Старые зелёные градиентные кнопки из fox-styles */
+:root:not([data-kw-light]) .kw-button--green-old,
+:root:not([data-kw-light]) .GreenBtnStyle.h24,
+:root:not([data-kw-light]) .GreenBtnStyle.h30 {
+  background: var(--kwd-on-positive) !important;
+  color: #fff !important;
+}
+
+:root:not([data-kw-light]) .kw-button--green-old:not(.kw-button--inactive):not(.kw-button--waiting):hover,
+:root:not([data-kw-light]) .GreenBtnStyle:hover {
+  background: var(--kwd-on-positive-hover) !important;
+}
+
+/* ----------------------------------------------------------
+   6. Тултипы
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .tooltipster-sidetip.tooltipster-light .tooltipster-box,
+:root:not([data-kw-light]) .tooltipster-sidetip.tooltipster-light .tooltipster-content {
+  background: #262b34 !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: #e8ebf0 !important;
+}
+
+:root:not([data-kw-light]) .tooltipster-sidetip.tooltipster-light.tooltipster-bottom .tooltipster-arrow-background {
+  border-bottom-color: #262b34 !important;
+}
+
+:root:not([data-kw-light]) .tooltipster-sidetip.tooltipster-light.tooltipster-left .tooltipster-arrow-background {
+  border-left-color: #262b34 !important;
+}
+
+:root:not([data-kw-light]) .tooltipster-sidetip.tooltipster-light.tooltipster-right .tooltipster-arrow-background {
+  border-right-color: #262b34 !important;
+}
+
+:root:not([data-kw-light]) .tooltipster-sidetip.tooltipster-light.tooltipster-top .tooltipster-arrow-background {
+  border-top-color: #262b34 !important;
+}
+
+:root:not([data-kw-light]) .switch-menu-tooltip .tooltipster-content,
+:root:not([data-kw-light]) .tooltip_circle--light {
+  background: #262b34 !important;
+  color: #e8ebf0 !important;
+}
+
+/* ----------------------------------------------------------
+   7. v-select (Vue-компонент выпадающих списков)
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .v-select .vs__dropdown-toggle {
+  background: #171a20 !important;
+  border-color: var(--color-grayscale-field-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .v-select .vs__selected,
+:root:not([data-kw-light]) .v-select .vs__search {
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .v-select.vs--disabled .vs__dropdown-toggle {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .v-select .vs__dropdown-toggle .vs__open-indicator {
+  fill: #c9ced8 !important;
+}
+
+:root:not([data-kw-light]) .v-select .vs__dropdown-menu {
+  background: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .v-select .vs__dropdown-option {
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .v-select .vs__dropdown-option:hover,
+:root:not([data-kw-light]) .v-select .vs__dropdown-option--active {
+  background: var(--color-accent-primary-border-solid-hover) !important;
+}
+
+:root:not([data-kw-light]) .v-select .vs__group-title,
+:root:not([data-kw-light]) .v-select .vs__clear {
+  color: var(--color-typography-support) !important;
+}
+
+/* Калькулятор vc-container */
+:root:not([data-kw-light]) .vc-container {
+  background: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .vc-nav-item.is-active,
+:root:not([data-kw-light]) .vc-nav-item:hover {
+  background: var(--color-grayscale-border-hover) !important;
+}
+
+:root:not([data-kw-light]) .vc-nav-popover-content,
+:root:not([data-kw-light]) .vc-nav-popover-inner-content {
+  background: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+/* ----------------------------------------------------------
+   8. Слайдеры, переключатели, прогресс
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .slick-slider .slick-list .slick-track {
+  background: transparent;
+}
+
+:root:not([data-kw-light]) .switch-menu__track {
+  background-color: #3a4150 !important;
+}
+
+:root:not([data-kw-light]) .switch-menu__thumb,
+:root:not([data-kw-light]) .k-switch__thumb {
+  background-color: #e8ebf0 !important;
+}
+
+:root:not([data-kw-light]) .switch-menu__input:checked ~ .switch-menu__track {
+  background-color: var(--color-accent-positive-base) !important;
+}
+
+:root:not([data-kw-light]) .file-list-carousel__arrow,
+:root:not([data-kw-light]) .file-list-carousel .file-list-icons > div,
+:root:not([data-kw-light]) .file-list-carousel .miniatures > div .image {
+  background: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .file-uploader-optimistic,
+:root:not([data-kw-light]) .file-list__item--not-image,
+:root:not([data-kw-light]) .pdf-view__page-loader {
+  background: var(--color-grayscale-page-bg-light) !important;
+}
+
+:root:not([data-kw-light]) .table-style .status {
+  background: #3a4150 !important;
+  color: #e8ebf0 !important;
+}
+
+/* ----------------------------------------------------------
+   9. Хедер, футер, табы, фильтры
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .subnav,
+:root:not([data-kw-light]) body .footer.footer--en,
+:root:not([data-kw-light]) .header-desktop__wrapper {
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+:root:not([data-kw-light]) .header.header-unfixed,
+:root:not([data-kw-light]) .header-desktop {
+  background-color: var(--color-grayscale-page-bg-default) !important;
+}
+
+:root:not([data-kw-light]) .wants-filter__links,
+:root:not([data-kw-light]) .quiz-day__tab,
+:root:not([data-kw-light]) .quiz-day__hide-cancel,
+:root:not([data-kw-light]) .quiz-day__hide-confirm,
+:root:not([data-kw-light]) .signin-signup-page .signin-signup__content,
+:root:not([data-kw-light]) .auth-form .login-form-phone-last-element-highlight,
+:root:not([data-kw-light]) .connects-points__point,
+:root:not([data-kw-light]) .exchange-stats,
+:root:not([data-kw-light]) .headline-notice .kw-button,
+:root:not([data-kw-light]) .favorites-popup__cat-header,
+:root:not([data-kw-light]) .favorites-popup__subcat-header,
+:root:not([data-kw-light]) .email-notification .kw-button--gray-border,
+:root:not([data-kw-light]) input:checked + .twin-radio-switch__label {
+  background-color: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .k-tabs__item,
+:root:not([data-kw-light]) .k-tabs__item-number {
+  background: transparent;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-support) !important;
+}
+
+:root:not([data-kw-light]) .k-tabs__item.active,
+:root:not([data-kw-light]) .k-tabs__item.active .k-tabs__item-number {
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-accent-primary-base) !important;
+}
+
+/* Иконки, залитые белым — красим в цвет текста */
+:root:not([data-kw-light]) .ispinner.ispinner--white .ispinner__blade {
+  background: #e8ebf0 !important;
+}
+
+:root:not([data-kw-light]) .icon-custom-help_bg-white::before {
+  background: #e8ebf0 !important;
+}
+
+:root:not([data-kw-light]) .social-button--vk > span,
+:root:not([data-kw-light]) .social-button--vkid > span {
+  background: transparent !important;
+  color: #fff !important;
+}
+
+/* ----------------------------------------------------------
+   10. Мелкие утилиты
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .text-white,
+:root:not([data-kw-light]) .border-white {
+  color: #fff !important;
+}
+
+:root:not([data-kw-light]) .border-white {
+  border-color: #fff !important;
+}
+
+:root:not([data-kw-light]) .white {
+  background: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .color-white {
+  color: #fff !important;
+}
+
+/* Аватары-заглушки рисуются серым — оставляем как есть,
+   но подсветку «дефолтного» аватара делаем светлее. */
+:root:not([data-kw-light]) .user-avatar__default {
+  background: #262b34 !important;
+}
+
+/* ----------------------------------------------------------
+   11. Логотип и инлайновые SVG
+   Логотип kwork приходит инлайном с fill="#333" — на тёмном фоне
+   он не виден. Атрибут fill слабее CSS-свойства fill, поэтому
+   переопределяем через стиль. Оранжевую часть (#FE7A32) не трогаем.
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) svg.svg-logo path[fill="#333"],
+:root:not([data-kw-light]) svg.svg-logo path[fill="#333333"] {
+  fill: #e8ebf0 !important;
+}
+
+/* Прочие инлайновые иконки с тёмной заливкой */
+:root:not([data-kw-light]) svg [fill="#333"],
+:root:not([data-kw-light]) svg [fill="#333333"],
+:root:not([data-kw-light]) svg [stroke="#333"] {
+  fill: #e8ebf0 !important;
+  stroke: #e8ebf0 !important;
+}
+
+/* ----------------------------------------------------------
+   12. Блоки главной страницы и витрины кворков
+   Найдены замером на реальных страницах: оставались светлыми
+   из-за хардкод-цветов и белого токена как фона.
+   ---------------------------------------------------------- */
+
+/* Промо-баннеры светло-зелёные (#e4f7ec) — гасим в тёмный оттенок */
+:root:not([data-kw-light]) .banner-market,
+:root:not([data-kw-light]) .banner-bottom {
+  background: #10251a !important;
+}
+
+/* Секции с белым фоном */
+:root:not([data-kw-light]) .steps,
+:root:not([data-kw-light]) .partners,
+:root:not([data-kw-light]) .inspire__item-inner {
+  background: var(--color-grayscale-bg-base) !important;
+}
+
+:root:not([data-kw-light]) .steps__image {
+  background: var(--color-grayscale-page-bg-light) !important;
+}
+
+/* Плитки-популярные рубрики: тёмная подложка + картинка поверх */
+:root:not([data-kw-light]) .popular-rubrics__link,
+:root:not([data-kw-light]) .collageSubcategories-item {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+  color: var(--color-typography-text) !important;
+}
+
+/* Затемнение поверх видео-превью опиралось на токен заголовка —
+   в тёмной теме токен светлый, поэтому задаём затемнение явно. */
+:root:not([data-kw-light]) .promo-video__link {
+  background: rgba(6, 7, 9, 0.72) !important;
+}
+
+/* Теги категорий и плашки цены в карточках кворков */
+:root:not([data-kw-light]) .cat-header-tags__item {
+  background: var(--color-grayscale-bg-base) !important;
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .cat-header-tags__item.active {
+  background: var(--color-accent-primary-base) !important;
+  color: #fff !important;
+  border-color: var(--color-accent-primary-base) !important;
+}
+
+:root:not([data-kw-light]) .kwork-card-item__info-price,
+:root:not([data-kw-light]) .kwork-card-list-item__info-price,
+:root:not([data-kw-light]) .recommend-block-item__info-price {
+  background: var(--color-grayscale-bg-base) !important;
+}
+
+/* Градиентное «затухание» у плашки цены зашито на #fff */
+:root:not([data-kw-light]) .kwork-card-item__info-price::before,
+:root:not([data-kw-light]) .kwork-card-list-item__info-price::before,
+:root:not([data-kw-light]) .recommend-block-item__info-price::before {
+  background: linear-gradient(
+    90deg,
+    rgba(28, 31, 38, 0),
+    var(--color-grayscale-bg-base) 70%,
+    var(--color-grayscale-bg-base)
+  ) !important;
+}
+
+/* ----------------------------------------------------------
+   13. Лендинг «Фрилансеру» (/for-sellers)
+   Отдельный одностраничник со своими хардкод-фонами.
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .for-sellers__people,
+:root:not([data-kw-light]) .for-sellers__lessons,
+:root:not([data-kw-light]) .for-sellers__reviews,
+:root:not([data-kw-light]) .for-sellers__faq-list-item,
+:root:not([data-kw-light]) .for-sellers__footer {
+  background: var(--color-grayscale-bg-base) !important;
+}
+
+:root:not([data-kw-light]) .for-sellers__steps,
+:root:not([data-kw-light]) .for-sellers__faq,
+:root:not([data-kw-light]) .for-sellers__lessons-inner {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+}
+
+/* Косой треугольник-скос у блока уроков повторяет цвет секции */
+:root:not([data-kw-light]) .for-sellers__lessons-inner::after {
+  border-top-color: var(--color-grayscale-page-bg-light) !important;
+}
+
+:root:not([data-kw-light]) .for-sellers__people-list-action,
+:root:not([data-kw-light]) .for-sellers__reviews-list-item {
+  background-color: #262b34 !important;
+  color: var(--color-typography-text) !important;
+}
+
+/* Полупрозрачная плашка поверх фото — задаём затемнение явно,
+   токен белого оставлен светлым ради текста на кнопках. */
+:root:not([data-kw-light]) .for-sellers__header-stats {
+  background: rgba(16, 18, 22, 0.72) !important;
+}
+
+/* Стрелки между отзывами приходят картинкой — на тёмном фоне
+   тёмная стрелка пропала бы, поэтому перекрашиваем в светлый тон. */
+:root:not([data-kw-light]) .for-sellers__reviews-list-item::after {
+  filter: invert(1) hue-rotate(180deg) brightness(1.1);
+}
+
+/* Точки-индикаторы превью */
+:root:not([data-kw-light]) .kwcard-ppreview__dot {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+}
+
+:root:not([data-kw-light]) .kwcard-ppreview__dot.active,
+:root:not([data-kw-light]) .kwcard-ppreview__dot.edge {
+  background-color: var(--color-accent-primary-base) !important;
+}
+
+:root:not([data-kw-light]) .kwcard-ppreview__dot::before {
+  background: var(--color-grayscale-page-bg-default) !important;
+}
+
+/* Trumbowyg — редактор описания кворка */
+:root:not([data-kw-light]) .trumbowyg-style--textarea .trumbowyg-box .trumbowyg-editor,
+:root:not([data-kw-light]) .trumbowyg-style--input .trumbowyg-box {
+  background: #171a20 !important;
+  border-color: var(--color-grayscale-field-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .trumbowyg-editor .trumbowyg-box {
+  background: #171a20 !important;
+  color: var(--color-typography-text) !important;
+  border-color: var(--color-grayscale-field-border) !important;
+}
+
+:root:not([data-kw-light]) .trumbowyg-editor .trumbowyg-toolbar {
+  background: var(--color-grayscale-page-bg-light) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+/* ----------------------------------------------------------
+   14. Legacy-bootstrap: general-styles.css и bootstrap.modal.css
+   Старые страницы (support, terms, личный кабинет) свёрстаны
+   на bootstrap 3 и держат #fff/#000 напрямую в CSS.
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .modal-content,
+:root:not([data-kw-light]) .modal-header,
+:root:not([data-kw-light]) .modal-footer {
+  background: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .modal-header .close,
+:root:not([data-kw-light]) .close {
+  color: var(--color-grayscale-icon) !important;
+  text-shadow: none !important;
+}
+
+/* Серые кнопки bootstrap: фон уже тёмный, текст должен быть светлым */
+:root:not([data-kw-light]) .button.button-gray,
+:root:not([data-kw-light]) button.button.button-gray,
+:root:not([data-kw-light]) .button.button-gray-success,
+:root:not([data-kw-light]) button.button.button-gray-success,
+:root:not([data-kw-light]) .button.button-gray-danger,
+:root:not([data-kw-light]) button.button.button-gray-danger,
+:root:not([data-kw-light]) .button.button-gray-flat,
+:root:not([data-kw-light]) button.button.button-gray-flat {
+  color: var(--color-typography-text) !important;
+}
+
+/* У .button-gray-flat на сайте белый фон — оставляем тёмную плашку */
+:root:not([data-kw-light]) .button.button-gray-flat,
+:root:not([data-kw-light]) button.button.button-gray-flat {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+/* Текстовые классы-bootstrap */
+:root:not([data-kw-light]) .text-dark {
+  color: var(--color-typography-title) !important;
+}
+
+:root:not([data-kw-light]) .text-muted {
+  color: var(--color-typography-support) !important;
+}
+
+/* ----------------------------------------------------------
+   15. fox-styles: кнопки и утилиты старого UI
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .color-text,
+:root:not([data-kw-light]) .GrayBtnStyle,
+:root:not([data-kw-light]) .GrayBtnStyle:hover,
+:root:not([data-kw-light]) .btn-hover-orange:hover,
+:root:not([data-kw-light]) .white-btn.disabled:active,
+:root:not([data-kw-light]) .white-btn.disabled:hover,
+:root:not([data-kw-light]) .t-profile-link,
+:root:not([data-kw-light]) .thumbnail-img-load__text,
+:root:not([data-kw-light]) .table-style a:not(.kw-button, .kw-link, .button-status),
+:root:not([data-kw-light]) .table-style .without-sort,
+:root:not([data-kw-light]) .chosen-container-multi .chosen-choices,
+:root:not([data-kw-light]) .chosen-container-multi .chosen-choices li.search-choice span {
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .gray {
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+/* Затухание текста в один-две слова — градиент рисуется цветом фона */
+:root:not([data-kw-light]) .oneline-faded:after,
+:root:not([data-kw-light]) .multiline-faded:after,
+:root:not([data-kw-light]) .portfolio-review__text-more:before {
+  background: linear-gradient(
+    to right,
+    rgba(28, 31, 38, 0),
+    var(--color-grayscale-bg-base)
+  ) !important;
+}
+
+/* Иконки-глифы, покрашенные в белый через background */
+:root:not([data-kw-light]) .ico-info,
+:root:not([data-kw-light]) .headline-notice__close-icon,
+:root:not([data-kw-light]) .header--theme-dark .custom-search .wrap-input-action__remove,
+:root:not([data-kw-light]) .custom-search .wrap-input-action__remove,
+:root:not([data-kw-light]) .icon-custom-help_bg-white:before,
+:root:not([data-kw-light]) .fox_success_attention p:before,
+:root:not([data-kw-light]) .fox_warning p:before,
+:root:not([data-kw-light]) .k-tabs__arrow:after {
+  filter: invert(1) hue-rotate(180deg) brightness(1.05);
+}
+
+/* ----------------------------------------------------------
+   16. kb.css — база знаний, поддержка, чат (/faq, /support)
+   Отдельный старенький билд с #f6f6f6, #8a8a8a и #585858.
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .kb .breadcrumbs,
+:root:not([data-kw-light]) .kb .support-tree .article-header:hover,
+:root:not([data-kw-light]) .kb .article-wrapper .article .question,
+:root:not([data-kw-light]) .kb .kb-search-results .search-result,
+:root:not([data-kw-light]) .kb .stages-table-info thead,
+:root:not([data-kw-light]) .kb .fr-view table.fr-alternate-rows tbody tr:nth-child(2n),
+:root:not([data-kw-light]) .kb .fr-view .fr-class-code,
+:root:not([data-kw-light]) .kb .footer {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+}
+
+:root:not([data-kw-light]) .kb .breadcrumbs .home-button,
+:root:not([data-kw-light]) .kb .breadcrumbs .breadcrumb .active,
+:root:not([data-kw-light]) .kb .article-wrapper .article .likes .like-button.liked,
+:root:not([data-kw-light]) .kb .kb-search-results .search-result .answer-wrapper .root-article,
+:root:not([data-kw-light]) .kb .custom-search .search-button,
+:root:not([data-kw-light]) .kb .custom-search input.form-control,
+:root:not([data-kw-light]) .page-conversation .stages-table-info__price-title {
+  color: var(--color-typography-support) !important;
+}
+
+:root:not([data-kw-light]) .kb .kb-search-results .search-results .search-result,
+:root:not([data-kw-light]) .kb .footer {
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .kb .kb-search-results .search-results .search-result .question,
+:root:not([data-kw-light]) .kb .kb-role-select .role-select-button,
+:root:not([data-kw-light]) .kb .kb-search-results .search-results .search-result {
+  color: var(--color-accent-primary-base) !important;
+}
+
+/* Заголовок базы знаний лежит поверх фоновой фотографии faq.jpg */
+:root:not([data-kw-light]) .kb .title,
+:root:not([data-kw-light]) .kb .bg-faq .title {
+  color: var(--kwd-white) !important;
+}
+
+/* Просмотрщик изображений — всегда тёмная подложка, текст белый */
+:root:not([data-kw-light]) .t-image-viewer .iv-body .iv-close,
+:root:not([data-kw-light]) .t-image-viewer .iv-body .iv-info,
+:root:not([data-kw-light]) .t-image-viewer .iv-body .iv-info__text .iv-user,
+:root:not([data-kw-light]) .t-image-viewer .iv-body .iv-control,
+:root:not([data-kw-light]) .iv-body--with-comments .iv-body__cancel-comment,
+:root:not([data-kw-light]) .file-list-image__file-name {
+  color: var(--kwd-white) !important;
+}
+
+:root:not([data-kw-light]) .t-image-viewer .iv-body .iv-bg {
+  background: rgba(8, 9, 12, 0.92) !important;
+}
+
+/* ----------------------------------------------------------
+   17. Загрузчик файлов (projects, new_project, support)
+   Карусель превью и списки файлов держат белые подложки.
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .file-list-carousel,
+:root:not([data-kw-light]) .file-list-carousel .file-list-icons > div,
+:root:not([data-kw-light]) .file-list-carousel .miniatures > div .image {
+  background-color: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+}
+
+:root:not([data-kw-light]) .file-list-carousel__arrow {
+  background: var(--color-grayscale-page-bg-light) !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-title) !important;
+}
+
+:root:not([data-kw-light]) .file-list-carousel__arrow:hover {
+  color: var(--color-accent-primary-base) !important;
+}
+
+:root:not([data-kw-light]) .file-uploader .file.deleted {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+  color: var(--color-typography-support) !important;
+}
+
+:root:not([data-kw-light]) .file-uploader .file.error,
+:root:not([data-kw-light]) .file-uploader .file.failed-optimistic {
+  background-color: #3a1f22 !important;
+  color: #ffb4b4 !important;
+}
+
+:root:not([data-kw-light]) .file-list__item .file-list__container:hover,
+:root:not([data-kw-light]) .file-list-icons > div > a:hover,
+:root:not([data-kw-light]) .file-list-icons > div > div:hover,
+:root:not([data-kw-light]) .file-list-carousel .file-list-icons .fsize {
+  color: var(--color-typography-text) !important;
+}
+
+/* ----------------------------------------------------------
+   18. popup-portfolio — просмотр работ в модальном окне
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .popup-portfolio .popup_content,
+:root:not([data-kw-light]) .popup-portfolio .portfolio-review,
+:root:not([data-kw-light]) .popup-portfolio .portfolio-review__text-link,
+:root:not([data-kw-light]) .popup-portfolio .portfolio-large__review,
+:root:not([data-kw-light]) .popup-portfolio .portfolio-about,
+:root:not([data-kw-light]) .popup-portfolio .portfolio-error {
+  background-color: var(--color-grayscale-bg-base) !important;
+  border-color: var(--color-grayscale-border) !important;
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .popup-portfolio .portfolio-header__link,
+:root:not([data-kw-light]) .popup-portfolio .portfolio-large__review-comment {
+  color: var(--kwd-white) !important;
+}
+
+/* ----------------------------------------------------------
+   19. Лендинги /for-buyers и /for-sellers
+   Фото-подложки здесь очень светлые (средняя яркость 239/255),
+   поэтому поверх фото обязателен тёмный слой.
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .land-video-link__footer {
+  background: var(--color-grayscale-page-bg-light) !important;
+}
+
+:root:not([data-kw-light]) .land-video-show__footer {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+/* Фото then_learn очень светлое (средняя яркость 239/255), поэтому
+   кладём сверху тёмный слой: белый текст читается, фото остаётся видимым */
+:root:not([data-kw-light]) .land-video-show__footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(16, 18, 22, 0.64);
+}
+
+:root:not([data-kw-light]) .land-video-show__footer .inner,
+:root:not([data-kw-light]) .land-video-link__footer .inner {
+  position: relative;
+  z-index: 1;
+}
+
+:root:not([data-kw-light]) .land-video-show__footer .kw-header,
+:root:not([data-kw-light]) .land-video-show__footer .subtitle,
+:root:not([data-kw-light]) .land-video-show__footer p,
+:root:not([data-kw-light]) .land-video-show__banner .kw-header,
+:root:not([data-kw-light]) .land-video-show__banner .subtitle,
+:root:not([data-kw-light]) .land-video-link__banner .kw-header,
+:root:not([data-kw-light]) .land-video-link__banner .subtitle {
+  color: var(--kwd-white) !important;
+}
+
+/* У then_learn фон переопределён сайтом как typography-white —
+   мы уже перевернули токен, но задаём явно для надёжности */
+:root:not([data-kw-light]) .for-buyers .land-video-link__what-will-you-learn {
+  background-color: var(--color-grayscale-bg-base) !important;
+}
+
+/* ----------------------------------------------------------
+   20. Прочее: хлебные крошки, языки, слайдеры, 401
+   ---------------------------------------------------------- */
+
+:root:not([data-kw-light]) .info-lang {
+  color: var(--color-typography-support) !important;
+}
+
+:root:not([data-kw-light]) .info-lang--active {
+  color: var(--color-accent-positive-base) !important;
+}
+
+:root:not([data-kw-light]) .countdown-block {
+  color: var(--color-typography-support) !important;
+}
+
+:root:not([data-kw-light]) .switch-menu__label_left,
+:root:not([data-kw-light]) .switch-menu__label_right,
+:root:not([data-kw-light]) .switch-menu__label_left.checked,
+:root:not([data-kw-light]) .switch-menu__label_right.checked {
+  color: var(--color-typography-text) !important;
+}
+
+:root:not([data-kw-light]) .steps__image,
+:root:not([data-kw-light]) .responses-market__inner {
+  background-color: var(--color-grayscale-page-bg-light) !important;
+}
+
+/* Градиенты-подложки под ценами и хлебными крошками */
+:root:not([data-kw-light]) .kwork-card-item__info-price:before,
+:root:not([data-kw-light]) .recommend-block-item__info-price:before,
+:root:not([data-kw-light]) .bread-crump ol.nowrap:before,
+:root:not([data-kw-light]) .cat-header-tags__arrow:after {
+  background: linear-gradient(
+    to right,
+    rgba(28, 31, 38, 0),
+    var(--color-grayscale-bg-base)
+  ) !important;
+}
+
+/* Стрелки slick рисуются через content + color:#000 */
+:root:not([data-kw-light]) .slick-dots li button:before {
+  color: var(--color-grayscale-icon) !important;
+}

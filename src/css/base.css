@@ -1,0 +1,228 @@
+/* ==========================================================
+   Kwork Dark — base.css
+   База: поверхности страницы, скроллбары, типографика,
+   мягкий димминг изображений, стили переключателя темы.
+   ========================================================== */
+
+:root:not([data-kw-light]) {
+  color-scheme: dark !important;
+}
+
+:root:not([data-kw-light]) html,
+:root:not([data-kw-light]) body {
+  background-color: var(--color-grayscale-page-bg-default) !important;
+  color: var(--color-typography-text) !important;
+}
+
+/* Сайт рисует фон на обёртках, а не на body — гасим и их. */
+:root:not([data-kw-light]) .all_page,
+:root:not([data-kw-light]) .kw-wrapper,
+:root:not([data-kw-light]) .page-flex__content,
+:root:not([data-kw-light]) #app,
+:root:not([data-kw-light]) #app-header,
+:root:not([data-kw-light]) #app-footer {
+  background-color: var(--color-grayscale-page-bg-default) !important;
+}
+
+/* Убираем белые вспышки при прокрутке вниз страницы
+   (браузер подкрашивает overscroll белым). */
+:root:not([data-kw-light]) {
+  overscroll-behavior-y: none;
+}
+
+html:not([data-kw-light]),
+body:not([data-kw-light]) {
+  scrollbar-color: #3a4150 var(--color-grayscale-page-bg-default);
+}
+
+/* ---------- Скроллбары (WebKit/Blink) ---------- */
+:root:not([data-kw-light]) ::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+:root:not([data-kw-light]) ::-webkit-scrollbar-track {
+  background: var(--color-grayscale-page-bg-default) !important;
+}
+
+:root:not([data-kw-light]) ::-webkit-scrollbar-thumb {
+  background: #3a4150;
+  border: 2px solid var(--color-grayscale-page-bg-default);
+  border-radius: 6px;
+}
+
+:root:not([data-kw-light]) ::-webkit-scrollbar-thumb:hover {
+  background: #4c5464;
+}
+
+/* ---------- Выделение текста ---------- */
+:root:not([data-kw-light]) ::selection {
+  background: rgba(51, 149, 255, 0.35);
+  color: #fff;
+}
+
+/* ---------- Типографика по умолчанию ---------- */
+:root:not([data-kw-light]) h1,
+:root:not([data-kw-light]) h2,
+:root:not([data-kw-light]) h3,
+:root:not([data-kw-light]) h4,
+:root:not([data-kw-light]) h5,
+:root:not([data-kw-light]) h6 {
+  color: var(--color-typography-title);
+}
+
+:root:not([data-kw-light]) .text-secondary,
+:root:not([data-kw-light]) .text-light {
+  color: var(--color-typography-support) !important;
+}
+
+/* ---------- Мягкий димминг изображений ----------
+   Приглушаем яркость превью, чтобы они не «слепили»
+   на тёмном фоне. Логотипы, иконки и аватары не трогаем. */
+
+:root:not([data-kw-light]) img,
+:root:not([data-kw-light]) video {
+  filter: brightness(0.92) saturate(1.05);
+}
+
+/* Изображения без собственного фона (иконки, логотипы, аватары)
+   оставляем без изменений — иначе они станут тусклыми. */
+:root:not([data-kw-light]) img.svg-logo,
+:root:not([data-kw-light]) img.brand-image,
+:root:not([data-kw-light]) .header__logo img,
+:root:not([data-kw-light]) .user-avatar img,
+:root:not([data-kw-light]) .avatar img,
+:root:not([data-kw-light]) img[class*="icon"],
+:root:not([data-kw-light]) img[class*="ico"],
+:root:not([data-kw-light]) .icon img,
+:root:not([data-kw-light]) .ico img,
+:root:not([data-kw-light]) .file-list-image__container img,
+:root:not([data-kw-light]) .t-image-viewer .iv-image {
+  filter: none;
+}
+
+/* ---------- Формы: нативные элементы ---------- */
+:root:not([data-kw-light]) input,
+:root:not([data-kw-light]) textarea,
+:root:not([data-kw-light]) select,
+:root:not([data-kw-light]) button {
+  color-scheme: dark;
+}
+
+:root:not([data-kw-light]) input::placeholder,
+:root:not([data-kw-light]) textarea::placeholder {
+  color: var(--color-typography-support);
+  opacity: 1;
+}
+
+:root:not([data-kw-light]) input:-webkit-autofill,
+:root:not([data-kw-light]) input:-webkit-autofill:hover,
+:root:not([data-kw-light]) input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-typography-text);
+  -webkit-box-shadow: 0 0 0 1000px #171a20 inset;
+  caret-color: var(--color-typography-text);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* ---------- Фокус ---------- */
+:root:not([data-kw-light]) :focus-visible {
+  outline: 2px solid var(--color-accent-primary-base);
+  outline-offset: 2px;
+}
+
+/* ==========================================================
+   Переключатель темы на странице
+   ========================================================== */
+
+#kwd-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--color-grayscale-border, #2a2e37);
+  border-radius: 999px;
+  background: rgba(28, 31, 38, 0.94);
+  color: #e8ebf0;
+  font: 500 13px/1 Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#kwd-toggle:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+#kwd-toggle:active {
+  transform: translateY(0);
+}
+
+#kwd-toggle:focus-visible {
+  opacity: 1;
+  outline: 2px solid #3395ff;
+  outline-offset: 2px;
+}
+
+/* Иконка «луна/солнце» */
+#kwd-toggle .kwd-ico {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+#kwd-toggle .kwd-ico::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #1c1f26;
+}
+
+#kwd-toggle .kwd-label {
+  white-space: nowrap;
+}
+
+/* В светлой теме кнопка остаётся читаемой на светлом фоне. */
+:root[data-kw-light] #kwd-toggle {
+  background: rgba(255, 255, 255, 0.94);
+  color: #333;
+  border-color: #dedfe4;
+}
+
+:root[data-kw-light] #kwd-toggle .kwd-ico::after {
+  background: #fff;
+}
+
+@media (max-width: 767px) {
+  #kwd-toggle {
+    right: 12px;
+    bottom: 12px;
+    padding: 8px;
+  }
+
+  #kwd-toggle .kwd-label {
+    display: none;
+  }
+}
+
+@media print {
+  #kwd-toggle {
+    display: none !important;
+  }
+}

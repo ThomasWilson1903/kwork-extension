@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Kwork Dark",
+  "version": "1.0.0",
+  "description": "Темная тема для kwork.ru и kwork.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Kwork Dark — переключить тему",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.kwork.ru/*",
+    "*://*.kwork.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://kwork.ru/*",
+        "*://*.kwork.ru/*",
+        "*://kwork.com/*",
+        "*://*.kwork.com/*"
+      ],
+      "exclude_matches": [
+        "*://blog.kwork.ru/*",
+        "*://blog.kwork.com/*"
+      ],
+      "css": [
+        "src/css/tokens.css",
+        "src/css/base.css",
+        "src/css/components.css"
+      ],
+      "js": [
+        "src/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}

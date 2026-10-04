@@ -1,0 +1,184 @@
+/* ==========================================================
+   Kwork Dark — tokens.css
+   Переопределение дизайн-токенов kwork (variables.css)
+   ========================================================== */
+
+/* Токены применяются только когда тема включена.
+   Селектор :root:not([data-kw-light]) (специфичность 0,2,0) + !important
+   гарантирует победу над :root из variables.css независимо
+   от порядка подключения стилей. */
+
+:root:not([data-kw-light]) {
+  /* ---------- Типографика ---------- */
+  --color-typography-title: #e8ebf0 !important;
+  --color-typography-title-rgb: 232, 235, 240 !important;
+  --color-typography-text: #e8ebf0 !important;
+  --color-typography-text-rgb: 232, 235, 240 !important;
+  --color-typography-support: #98a0ad !important;
+  --color-typography-support-rgb: 152, 160, 173 !important;
+  --color-typography-support-hover: #b4bcc8 !important;
+  --color-typography-support-hover-rgb: 180, 188, 200 !important;
+  --color-typography-tip: #98a0ad !important;
+  --color-typography-tip-rgb: 152, 160, 173 !important;
+  --color-typography-tip-hover: #b4bcc8 !important;
+  --color-typography-tip-hover-rgb: 180, 188, 200 !important;
+
+  /* ---------- Неоднозначный токен: переворот ----------
+     --color-typography-white на сайте работает и как ФОН (349
+     применений), и как ЦВЕТ ТЕКСТА (399 применений). Поэтому мы
+     НЕ перечисляем сотни селекторов, а переворачиваем сам токен:
+     в тёмной теме «белый» становится тёмной поверхностью.
+     Так чинятся оба случая разом, включая новые компоненты.
+
+     Следствие: весь текст, который должен остаться белым (поверх
+     цветных кнопок и фотографий), перечислен в components.css —
+     раздел 1a. */
+  --color-typography-white: #1c1f26 !important;
+  --color-typography-white-rgb: 28, 31, 38 !important;
+  --color-typography-white-secondary: #171a20 !important;
+  --color-typography-white-secondary-rgb: 23, 26, 32 !important;
+
+  /* ---------- Оттенки серого / поверхности ---------- */
+  --color-grayscale-bg-base: #1c1f26 !important;
+  --color-grayscale-bg-base-rgb: 28, 31, 38 !important;
+  --color-grayscale-page-bg-default: #101216 !important;
+  --color-grayscale-page-bg-default-rgb: 16, 18, 22 !important;
+  --color-grayscale-page-bg-light: #171a20 !important;
+  --color-grayscale-page-bg-light-rgb: 23, 26, 32 !important;
+  --color-grayscale-bg-dark: #0c0d10 !important;
+  --color-grayscale-bg-dark-rgb: 12, 13, 16 !important;
+  --color-grayscale-icon: #c9ced8 !important;
+  --color-grayscale-icon-rgb: 201, 206, 216 !important;
+  --color-grayscale-icon-hover: #e4e8ef !important;
+  --color-grayscale-icon-hover-rgb: 228, 232, 239 !important;
+  --color-grayscale-field-border: #333842 !important;
+  --color-grayscale-field-border-rgb: 51, 56, 66 !important;
+  --color-grayscale-border-hover: #363b46 !important;
+  --color-grayscale-border-hover-rgb: 54, 59, 70 !important;
+  --color-grayscale-border: #2a2e37 !important;
+  --color-grayscale-border-rgb: 42, 46, 55 !important;
+
+  /* ---------- Акцент: attention (оранжевый) ---------- */
+  --color-accent-attention-base: #ff8a4a !important;
+  --color-accent-attention-base-rgb: 255, 138, 74 !important;
+  --color-accent-attention-base-hover: #ffa366 !important;
+  --color-accent-attention-base-hover-rgb: 255, 163, 102 !important;
+  --color-accent-attention-border-solid: #4a3325 !important;
+  --color-accent-attention-border-solid-rgb: 74, 51, 37 !important;
+  --color-accent-attention-border-solid-hover: #5c4130 !important;
+  --color-accent-attention-border-solid-hover-rgb: 92, 65, 48 !important;
+  --color-accent-attention-border-alpha: rgba(255, 138, 74, 0.28) !important;
+  --color-accent-attention-border-alpha-hover: rgba(255, 138, 74, 0.42) !important;
+  --color-accent-attention-background: #2a1a12 !important;
+  --color-accent-attention-background-rgb: 42, 26, 18 !important;
+  --color-accent-attention-background-hover: #2f1e15 !important;
+  --color-accent-attention-background-hover-rgb: 47, 30, 21 !important;
+
+  /* ---------- Акцент: primary (синий) ---------- */
+  --color-accent-primary-base: #3395ff !important;
+  --color-accent-primary-base-rgb: 51, 149, 255 !important;
+  --color-accent-primary-base-hover: #66b0ff !important;
+  --color-accent-primary-base-hover-rgb: 102, 176, 255 !important;
+  --color-accent-primary-border-solid: #1e3a5c !important;
+  --color-accent-primary-border-solid-rgb: 30, 58, 92 !important;
+  --color-accent-primary-border-solid-hover: #26496f !important;
+  --color-accent-primary-border-solid-hover-rgb: 38, 73, 111 !important;
+  --color-accent-primary-border-alpha: rgba(51, 149, 255, 0.3) !important;
+  --color-accent-primary-border-alpha-hover: rgba(51, 149, 255, 0.45) !important;
+  --color-accent-primary-background: #101c2e !important;
+  --color-accent-primary-background-rgb: 16, 28, 46 !important;
+  --color-accent-primary-background-hover: #14243a !important;
+  --color-accent-primary-background-hover-rgb: 20, 36, 58 !important;
+
+  /* ---------- Акцент: positive (зелёный) ----------
+     Токен намеренно яркий: он работает как цвет ссылок, иконок
+     и индикаторов на тёмном фоне, где нужен высокий контраст.
+     Фоны кнопок с белым текстом берут отдельные затемнённые
+     оттенки из --kwd-btn-* (см. components.css). */
+  --color-accent-positive-base: #2fd47c !important;
+  --color-accent-positive-base-rgb: 47, 212, 124 !important;
+  --color-accent-positive-base-hover: #5ce39d !important;
+  --color-accent-positive-base-hover-rgb: 92, 227, 157 !important;
+  --color-accent-positive-border-solid: #1d4430 !important;
+  --color-accent-positive-border-solid-rgb: 29, 68, 48 !important;
+  --color-accent-positive-border-solid-hover: #24553c !important;
+  --color-accent-positive-border-solid-hover-rgb: 36, 85, 60 !important;
+  --color-accent-positive-border-alpha: rgba(47, 212, 124, 0.28) !important;
+  --color-accent-positive-border-alpha-hover: rgba(47, 212, 124, 0.42) !important;
+  --color-accent-positive-background: #10251a !important;
+  --color-accent-positive-background-rgb: 16, 37, 26 !important;
+  --color-accent-positive-background-hover: #14301f !important;
+  --color-accent-positive-background-hover-rgb: 20, 48, 31 !important;
+
+  /* ---------- Акцент: negative (красный) ---------- */
+  --color-accent-negative-base: #ff5c5f !important;
+  --color-accent-negative-base-rgb: 255, 92, 95 !important;
+  --color-accent-negative-base-hover: #ff8183 !important;
+  --color-accent-negative-base-hover-rgb: 255, 129, 131 !important;
+  --color-accent-negative-border-solid: #4d2326 !important;
+  --color-accent-negative-border-solid-rgb: 77, 35, 38 !important;
+  --color-accent-negative-border-solid-hover: #5e2b2f !important;
+  --color-accent-negative-border-solid-hover-rgb: 94, 43, 47 !important;
+  --color-accent-negative-border-alpha: rgba(255, 92, 95, 0.3) !important;
+  --color-accent-negative-border-alpha-hover: rgba(255, 92, 95, 0.45) !important;
+  --color-accent-negative-background: #2a1418 !important;
+  --color-accent-negative-background-rgb: 42, 20, 24 !important;
+  --color-accent-negative-background-hover: #331a1e !important;
+  --color-accent-negative-background-hover-rgb: 51, 26, 30 !important;
+}
+
+/* ---------- v-select (выпадающие списки) ----------
+   У библиотеки собственный набор переменных со светлыми значениями. */
+
+:root:not([data-kw-light]) {
+  --vs-colors--lightest: rgba(152, 160, 173, 0.2) !important;
+  --vs-colors--light: rgba(152, 160, 173, 0.4) !important;
+  --vs-colors--dark: #c9ced8 !important;
+  --vs-colors--darkest: rgba(0, 0, 0, 0.55) !important;
+  --vs-search-input-bg: #101216 !important;
+  --vs-state-disabled-bg: #171a20 !important;
+  --vs-controls--deselect-text-shadow: 0 1px 0 #0c0d10 !important;
+  --vs-selected-bg: #262b34 !important;
+  --vs-selected-color: #e8ebf0 !important;
+  --vs-dropdown-bg: #1c1f26 !important;
+  --vs-dropdown-option-bg: #1c1f26 !important;
+  --vs-dropdown-option--active-bg: #26496f !important;
+  --vs-dropdown-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.6) !important;
+  --vs-border-color: #333842 !important;
+}
+
+/* ---------- Оттенки акцентов под белый текст ----------
+   Акцентные токены выше яркие: они нужны для ссылок, иконок
+   и индикаторов на тёмном фоне. Но на залитых плашках и
+   кнопках лежит белый текст, а поверх яркого тона он даёт
+   контраст ~2–3. Здесь — затемнённые оттенки, которые дают
+   белому тексту 4.5+ (WCAG AA). Используются в components.css. */
+
+:root:not([data-kw-light]) {
+  --kwd-on-primary: #0a6fd6 !important;      /* белый текст: 4.93 */
+  --kwd-on-primary-hover: #095fba !important;
+  --kwd-on-positive: #178546 !important;     /* 4.69 */
+  --kwd-on-positive-hover: #168041 !important;
+  --kwd-on-positive-muted: #146c3c !important;
+  --kwd-on-attention: #c2551a !important;    /* 4.56 */
+  --kwd-on-attention-hover: #a8460f !important;
+  --kwd-on-negative: #d32f2f !important;     /* 4.98 */
+  --kwd-on-negative-hover: #b02525 !important;
+}
+
+/* ---------- Настоящий белый ----------
+   После переворота токена нужен явный доступ к белому: он нужен
+   для текста на цветных плашках и поверх фотографий. */
+:root:not([data-kw-light]) {
+  --kwd-white: #ffffff !important;
+  --kwd-white-rgb: 255, 255, 255 !important;
+}
+
+/* ---------- Утилиты vc-container ---------- */
+:root:not([data-kw-light]) .vc-container {
+  --gray-200: #171a20 !important;
+  --gray-400: #98a0ad !important;
+  --gray-500: #7b8494 !important;
+  --gray-600: #e8ebf0 !important;
+  --gray-700: #e8ebf0 !important;
+}
